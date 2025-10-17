@@ -32,8 +32,7 @@ contract crocssdex is IFlashLoanSimpleReceiver, IUniswapV2Callee{
     function ADDRESSES_PROVIDER() external view returns (IPoolAddressesProvider) { return IPoolAddressesProvider(address(pool)); } 
     function POOL() external view returns (IPool) { return pool; }
     /** 闪电贷回调 */
-
-     function executeOperation(  
+    function executeOperation(  
         address asset,//借贷资产的合约地址，例如 USDT 或 ETH 的 ERC20 地址。
         uint256 amount,//本次闪电贷借到的数量。
         uint256 premium,//闪电贷手续费，即你必须在交易结束时归还的额外金额。通常是 amount * feeRate。
@@ -42,8 +41,6 @@ contract crocssdex is IFlashLoanSimpleReceiver, IUniswapV2Callee{
     ) external override returns (bool) {
         // 确认闪电贷到账
         require(IERC20(asset).balanceOf(address(this)) >= amount, "Flashloan failed");
-
-
         //跨dex套利程序
         IUniswapV2Pair(pairA).swap(
             pullTokenIs0 ? x : 0,
@@ -55,7 +52,6 @@ contract crocssdex is IFlashLoanSimpleReceiver, IUniswapV2Callee{
                 remainToken.call(abi.encodeWithSignature("transfer(address,uint256)", treasury, y - z - 1));
             require(success, "erc20 transfer 3 failing");
         }
-
         //归还闪电贷
         IERC20(asset).approve(address(pool), amount + premium);
 
