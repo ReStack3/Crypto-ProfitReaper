@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import "../types/StrategyParams.sol";
+import "types/StrategyParams.sol";
 
 contract TransparentProxy{
     address core;
@@ -16,4 +16,12 @@ contract TransparentProxy{
         );
         require(success, "Core call failed");
     }
+
+    // 代理合约提供了一个管理员专用的升级函数,这个函数只能由管理员调用，用于将代理合约指向新的逻辑合约实现。
+    function upgradeTo() external {
+        require();
+    }
+
+    //回退函数
+    fallback() external payable {}
 }

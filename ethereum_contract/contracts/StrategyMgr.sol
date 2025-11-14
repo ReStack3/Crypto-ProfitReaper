@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
+import "./libraries/IStrategyMgr.sol";
 
-contract StrategyRegistry {
+contract StrategyMgr is IStrategyMgr {
     address public admin;
     mapping(uint8 => address) public strategyById; // Strategy enum index -> impl address
     mapping(address => bool) public isEnabled;
