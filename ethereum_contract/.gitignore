@@ -1,10 +1,9 @@
 node_modules
 .env
-./ignition
-./cache
-./artifacts
-./scripts
-./test
+
+
+/scripts
+/test
 
 # Hardhat files
 /cache
@@ -20,3 +19,4 @@ node_modules
 
 # Hardhat Ignition default folder for deployments against a local node
 ignition/deployments/chain-31337
+ignition/node_modules
